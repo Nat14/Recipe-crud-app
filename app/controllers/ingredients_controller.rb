@@ -15,6 +15,7 @@ class IngredientsController < ApplicationController
   # GET /ingredients/new
   def new
     @ingredient = Ingredient.new
+    @ingredient.recipe = Recipe.find(params[:recipe_id])
   end
 
   # GET /ingredients/1/edit
@@ -25,7 +26,7 @@ class IngredientsController < ApplicationController
   # POST /ingredients.json
   def create
     @ingredient = Ingredient.new(ingredient_params)
-
+    @ingredient.recipe = Recipe.find(params[:recipe_id])
     respond_to do |format|
       if @ingredient.save
         format.html { redirect_to @ingredient, notice: 'Ingredient was successfully created.' }

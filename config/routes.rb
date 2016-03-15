@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  resources :ingredients
-  resources :recipes
+  resources :ingredients, except: [:new, :create]
+  resources :recipes do
+    resources :ingredients, only: [:new, :create, :update]
+  end
 
   root 'recipes#index'
   # The priority is based upon order of creation: first created -> highest priority.
